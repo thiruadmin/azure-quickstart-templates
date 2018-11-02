@@ -12,11 +12,10 @@
         "location": {
             "type": "string",
             "allowedValues": [
-                "eastus2",
-                "centralus",
-                "northeurope"
+                "northeurope",
+                "westeurope"
             ],
-            "defaultValue": "eastus2",
+            "defaultValue": "northeurope",
             "metadata": {
                 "description": "The location in which to create the Data Lake Store account."
             }
@@ -48,7 +47,7 @@
     },
     "resources": [
         {
-            "apiVersion": "2016-11-01",
+            "apiVersion": "2018-11-01",
             "name": "[parameters('dataLakeStoreName')]",
             "location": "[parameters('location')]",
             "type": "Microsoft.DataLakeStore/accounts",
