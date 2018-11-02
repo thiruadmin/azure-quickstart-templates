@@ -12,11 +12,10 @@
         "location": {
             "type": "string",
             "allowedValues": [
-                "eastus2",
-                "centralus",
-                "northeurope"
+                "northeurope",
+                "easteurope"
             ],
-            "defaultValue": "eastus2",
+            "defaultValue": "northeurope",
             "metadata": {
                 "description": "The location in which to create the Data Lake Store account."
             }
@@ -48,7 +47,7 @@
     },
     "resources": [
         {
-            "apiVersion": "2016-11-01",
+            "apiVersion": "2018-11-02",
             "name": "[parameters('dataLakeStoreName')]",
             "location": "[parameters('location')]",
             "type": "Microsoft.DataLakeStore/accounts",
@@ -69,7 +68,7 @@
         },
         {
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2018-02-01",
+            "apiVersion": "2018-11-01",
             "name": "addAccessPolicy",
             "resourceGroup": "[parameters('keyVaultResourceGroupName')]",
             "dependsOn": [
@@ -84,7 +83,7 @@
                         {
                             "type": "Microsoft.KeyVault/vaults/accessPolicies",
                             "name": "[concat(parameters('keyVaultName'), '/add')]",
-                            "apiVersion": "2015-06-01",
+                            "apiVersion": "2018-11-01",
                             "dependsOn": [],
                             "properties": {
                                 "accessPolicies": [
@@ -107,7 +106,7 @@
         },
         {
             "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2018-02-01",
+            "apiVersion": "2018-11-01",
             "name": "updateAdlsAccount",
             "dependsOn": [
                 "addAccessPolicy"
@@ -119,7 +118,7 @@
                     "contentVersion": "0.9.0.0",
                     "resources": [
                         {
-                            "apiVersion": "2016-11-01",
+                            "apiVersion": "2018-11-01",
                             "name": "[parameters('dataLakeStoreName')]",
                             "location": "[parameters('location')]",
                             "type": "Microsoft.DataLakeStore/accounts",
